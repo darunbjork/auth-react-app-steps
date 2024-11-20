@@ -17,7 +17,7 @@ function App () {
       <Routes>
         <Route path={"/"} element={isAuthenticated ? < Home/> : <Navigate to={"/login"} replace/>}/>
         <Route path={"/signup"} element={isAuthenticated ? <navigate to={"/"} replace /> : <Signup />}/>
-        <Route path={"/login"} element={ isAuthenticated ? <naviagte to={"/"}/> : < Login login={login}/>}/>
+        <Route path={"/login"} element={ isAuthenticated ? <naviagte to={"/"} replace/> : < Login login={login}/>}/>
       </Routes>
     </Router>
   )
