@@ -1,31 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from './Ccomponents/Navbar';
 import Home from './Ccomponents/Home';
 import Signup from './Ccomponents/Signup';
 import Login from './Ccomponents/Login';
+import { useContext } from "react";
+import AuthProvider  from "./AuthContext";
 function App () {
 
-  const [isAuthenticated, setIsAuthenticated ] = useState(() => {
-    return localStorage.getItem('isAuthenticated') === 'true';
-  });
+ const { isAuthenticated} = useContext(AuthProvider);
 
-  const login = () => {
-    setIsAuthenticated(true);
-    localStorage.setItem('isAuthenticated', 'true');
-  }
-
-  const logout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated');
-  }
   return (
     <Router>
-      <Navbar isAuthenticated={isAuthenticated} logout={logout}/>
+      <Navbar />
       <Routes>
         <Route path={"/"} element={isAuthenticated ? < Home/> : <Navigate to={"/login"} replace/>}/>
         <Route path={"/signup"} element={isAuthenticated ? <navigate to={"/"} replace /> : <Signup />}/>
-        <Route path={"/login"} element={ isAuthenticated ? <naviagte to={"/"} replace/> : < Login login={login}/>}/>
+        <Route path={"/login"} element={ isAuthenticated ? <naviagte to={"/"} replace/> : < Login />}/>
       </Routes>
     </Router>
   )

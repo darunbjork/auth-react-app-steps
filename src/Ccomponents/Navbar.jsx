@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import '../App.css';
+import  AuthContext from "../AuthContext";
 
-const Navbar = ({isAuthenticated, logout}) => {
+const Navbar = () => {
+  const {isAuthenticated, logout} = useContext(AuthContext);
 
    const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {

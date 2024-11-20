@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import '../App.css';
-const Login = ({login}) => {
+import AuthContext  from "../AuthContext";
+const Login = () => {
 
   const [username, setUsername ] = useState('');
   const [password, setPassword ] = useState('');
+  const {login} = useContext(AuthContext);
   const naviagte = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    login();
+    naviagte("/");
+    
     alert('Youu logged in successfully.')
 
     console.log('Login username:', username);
     console.log('Login password:', password);
 
-    login();
-    naviagte("/");
+   
   };
   return (
   <div>
