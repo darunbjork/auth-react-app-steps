@@ -6,11 +6,22 @@ const Login = () => {
 
   const [username, setUsername ] = useState('');
   const [password, setPassword ] = useState('');
+  const [error, setError ] = useState('');
   const {login} = useContext(AuthContext);
   const naviagte = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(username.trim() === '' || password.trim() === '') {
+      setError('username and password are required');
+      return;
+    }
+
+    if(password.length < 6 ) {
+      setError('Pasword must be at least 6 characters long.');
+      return;
+    }
 
     login();
     naviagte("/");
@@ -48,6 +59,7 @@ const Login = () => {
         />
       </label>
       <button type="submit">Login</button>
+      {error && <p style={{color: 'red'}}>{error}</p>}
     </form>
   </div>
   )

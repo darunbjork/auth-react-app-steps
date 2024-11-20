@@ -5,10 +5,21 @@ const Signup = () => {
 
   const [username, setUsername ] = useState('');
   const [password, setPassword ] = useState('');
+  const [error, setError ] = useState('');
   const naviagte = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(username.trim() === '' || password.trim() === '') {
+      setError('Username and password are required.');
+      return;
+    }
+
+    if(password.length < 6 ) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
 
     console.log('Signup Username', username);
     console.log('Signup password', password);
@@ -16,10 +27,11 @@ const Signup = () => {
     setUsername('');
     setPassword('');
     
+    setError('');
     alert('Account created! redirecting to Login page.');
-
     naviagte("/login")
   };
+
   return (
     <div>
       <h2>Signup page</h2>
@@ -45,6 +57,7 @@ const Signup = () => {
           required
           />
         </label>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Signup</button>
       </form>
     </div>
