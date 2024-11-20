@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+import '../App.css';
+const Login = ({login}) => {
 
   const [username, setUsername ] = useState('');
   const [password, setPassword ] = useState('');
+  const naviagte = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,10 +14,13 @@ const Login = () => {
 
     console.log('Login username:', username);
     console.log('Login password:', password);
+
+    login();
+    naviagte("/");
   };
   return (
   <div>
-    <h1>Login page</h1>
+    <h2>Login page</h2>
     <form onSubmit={handleSubmit}>
       <label htmlFor="username">
         Username:
