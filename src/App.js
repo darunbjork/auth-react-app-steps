@@ -6,11 +6,19 @@ import Signup from './Ccomponents/Signup';
 import Login from './Ccomponents/Login';
 function App () {
 
-  const [isAuthenticated, setIsAuthenticated ] = useState(false);
+  const [isAuthenticated, setIsAuthenticated ] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
 
-  const login = () => setIsAuthenticated(true);
+  const login = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem('isAuthenticated', 'true');
+  }
 
-  const logout = () => setIsAuthenticated(false);
+  const logout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('isAuthenticated');
+  }
   return (
     <Router>
       <Navbar isAuthenticated={isAuthenticated} logout={logout}/>

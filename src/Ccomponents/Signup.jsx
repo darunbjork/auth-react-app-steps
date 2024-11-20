@@ -16,7 +16,7 @@ const Signup = () => {
     setUsername('');
     setPassword('');
     
-    alert('you created accoutn successfully with the usernam ' + username);
+    alert('Account created! redirecting to Login page.');
 
     naviagte("/login")
   };
