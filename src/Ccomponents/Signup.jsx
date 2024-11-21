@@ -5,6 +5,8 @@ const Signup = () => {
 
   const [username, setUsername ] = useState('');
   const [password, setPassword ] = useState('');
+  const [email, setEmail ] = useState('');
+  const [birthday, setBirthday ] = useState('');
   const [error, setError ] = useState('');
   const naviagte = useNavigate();
 
@@ -14,10 +16,17 @@ const Signup = () => {
     if(username.trim() === '' || password.trim() === '') {
       setError('Username and password are required.');
       return;
-    }
+    };
 
     if(password.length < 6 ) {
       setError('Password must be at least 6 characters long.');
+      return;
+    };
+
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)) {
+      setError('Please enetr a valid email address');
       return;
     }
 
@@ -54,6 +63,29 @@ const Signup = () => {
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          />
+        </label>
+        <br />
+        <label 
+          htmlFor="email">
+          Email:
+          <input 
+          type="email" 
+          placeholder="Enter your email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          />
+        </label>
+        <label 
+        htmlFor="birthday">
+          Birthday:
+          <input 
+          type="date" 
+          placeholder="Enter your birth date"
+          value={birthday}
+          onChange={(e) => setBirthday(e.target.value)}
           required
           />
         </label>
