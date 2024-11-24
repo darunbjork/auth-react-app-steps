@@ -16,6 +16,7 @@ const Navbar = () => {
       {isAuthenticated ? 
       <>
         <Link to={"/"}>Home</Link>
+        <Link to={"/profile"}>Profile</Link>
         <button onClick={handleLogout}>Logout</button>
       </> 
       :
