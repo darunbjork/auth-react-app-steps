@@ -1,47 +1,50 @@
 import React, { useState } from 'react';
 
 const Profile = () => {
-  // State to store user details
+  // State for storing user details
   const [userDetails, setUserDetails] = useState({
     username: 'JohnDoe',
     email: 'johndoe@example.com',
     birthday: '1990-01-01',
   });
 
-  // State to control whether we are editing
+  // State for managing whether the form is editable
   const [isEditing, setIsEditing] = useState(false);
 
-  // Handle input changes
-  const handleChange = (e) => {
-    const fieldName = e.target.name; // Get the field name (e.g., "username")
-    const newValue = e.target.value; // Get the new value the user typed
-    setUserDetails({
-      ...userDetails, // Keep other fields unchanged
-      [fieldName]: newValue, // Update the specific field
-    });
+  // Function to handle changes in the input fields
+  const handleChange = (event) => {
+    const { name, value } = event.target; // Get the name of the field and its new value
+    setUserDetails((prevDetails) => ({
+      ...prevDetails, // Keep the existing details unchanged
+      [name]: value, // Update only the field that changed
+    }));
   };
 
-  // Handle saving changes
+  // Function to save the updated details and disable editing
   const handleSave = () => {
-    setIsEditing(false); // Turn off editing mode
+    setIsEditing(false); // Exit editing mode
     alert('Profile updated successfully!'); // Show a success message
   };
 
   return (
-    <div className='profile-container'>
+    <div className="profile-container">
       <h2>User Profile</h2>
       <form>
+        {/* Username field */}
         <label>
           Username:
           <input
             type="text"
-            name="username"
-            value={userDetails.username}
-            onChange={handleChange}
-            disabled={!isEditing} // Disable input when not editing
+            name="username" // Used to identify this input in handleChange
+            value={userDetails.username} // Current value from state
+            onChange={handleChange} // Update state when user types
+            disabled={!isEditing} // Disable input unless editing
+            placeholder="Enter your username" // Hint text for the user
           />
         </label>
         <br />
+
+        {/* Email field */}
         <label>
           Email:
           <input
@@ -49,10 +52,13 @@ const Profile = () => {
             name="email"
             value={userDetails.email}
             onChange={handleChange}
-            disabled={!isEditing} // Disable input when not editing
+            disabled={!isEditing}
+            placeholder="Enter your email"
           />
         </label>
         <br />
+
+        {/* Birthday field */}
         <label>
           Birthday:
           <input
@@ -60,11 +66,13 @@ const Profile = () => {
             name="birthday"
             value={userDetails.birthday}
             onChange={handleChange}
-            disabled={!isEditing} // Disable input when not editing
+            disabled={!isEditing}
+            placeholder="Select your birthday"
           />
         </label>
         <br />
-        {/* Conditional rendering for buttons */}
+
+        {/* Buttons for editing and saving */}
         {isEditing ? (
           <button type="button" onClick={handleSave}>
             Save
